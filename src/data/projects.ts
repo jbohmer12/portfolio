@@ -420,10 +420,10 @@ const allProjects: Project[] = [
         label: 'Production',
         title: 'Running the night',
         body: [
-          'Beyond the visuals, I ran everything else too. My job started weeks before each event, and on the night I was always the first one there and the last one to leave.',
+          'Beyond the visuals, I ran everything else too. My job started weeks before each event with the Instagram campaigns that sold the night, and on the night I was always the first one there and the last one to leave.',
         ],
         points: [
-          { k: 'Promotion', v: 'Putting up flyers around the city myself.' },
+          { k: 'Promotion', v: 'Instagram campaigns, plus putting up flyers around the city myself.' },
           { k: 'Curation', v: 'Building each lineup around local DJs and guests.' },
           { k: 'Production', v: 'Venues, budgets and settlements.' },
           { k: 'Lighting', v: 'Designing the light for each room.' },

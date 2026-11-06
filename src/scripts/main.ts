@@ -20,7 +20,13 @@ const signalProxy: Signal = {
 };
 const canvas = document.getElementById('gl') as HTMLCanvasElement | null;
 const pagePalette = document.body.dataset.palette?.split(',') as [string, string, string] | undefined;
-if (pagePalette) signalProxy.setPalette(pagePalette);
+// Home and About use the default palette; project pages keep their own colors in both themes.
+const isDefaultPage = !pagePalette || document.body.dataset.defaultPalette === 'true';
+const INK: [string, string, string] = ['#ffffff', '#ffffff', '#08080a']; // white lines, inverted to black in light mode
+const isLight = () => root.dataset.theme === 'light';
+const basePaletteFor = (): [string, string, string] =>
+  isDefaultPage && isLight() ? INK : ((pagePalette ?? ['#ff3b1f', '#ff8a00', '#0d0606']) as [string, string, string]);
+signalProxy.setPalette(basePaletteFor());
 if (!fine) signalProxy.setIntensity(0.8);
 if (canvas) {
   import('./signal').then(({ initSignal }) => {
@@ -28,7 +34,8 @@ if (canvas) {
     if (signal && queued.intensity !== undefined) signal.setIntensity(queued.intensity);
   });
 }
-const basePalette = pagePalette ?? ['#ff3b1f', '#ff8a00', '#0d0606'];
+let atBase = true;
+window.addEventListener('themechange', () => { if (atBase) signalProxy.setPalette(basePaletteFor()); });
 
 // ── Smooth scroll ──────────────────────────────────────────
 let lenis: Lenis | null = null;
@@ -112,6 +119,7 @@ if (rows.length) {
   if (fine) rows.forEach((row) => {
     const pal = row.dataset.palette!.split(',') as [string, string, string];
     row.addEventListener('pointerenter', () => {
+      atBase = false;
       signalProxy.setPalette(pal);
       signalProxy.setIntensity(1);
       if (preview) {
@@ -126,7 +134,8 @@ if (rows.length) {
       }
     });
     row.addEventListener('pointerleave', () => {
-      signalProxy.setPalette(basePalette as [string, string, string]);
+      atBase = true;
+      signalProxy.setPalette(basePaletteFor());
       preview?.classList.remove('is-on');
     });
   });
@@ -203,9 +212,9 @@ if (rows.length && !fine) {
       trigger: row, start: 'top 55%', end: 'bottom 45%',
       onToggle: (st) => {
         row.classList.toggle('is-active', st.isActive);
-        if (st.isActive) { signalProxy.setPalette(pal); signalProxy.setIntensity(0.3); }
+        if (st.isActive) { atBase = false; signalProxy.setPalette(pal); signalProxy.setIntensity(0.3); }
       },
-      onLeaveBack: () => signalProxy.setPalette(basePalette as [string, string, string]),
+      onLeaveBack: () => { atBase = true; signalProxy.setPalette(basePaletteFor()); },
     });
   });
   const list = document.querySelector('.work__list');

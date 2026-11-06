@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { experience, awards, site } from '../data/projects';
 const tools = ['Figma', 'Framer', 'Adobe Illustrator', 'Lightroom', 'Rhino 3D', 'TouchDesigner', 'Astro', 'JavaScript / TypeScript', 'Supabase', 'Netlify', 'GSAP', 'Three.js', 'Claude Code'];
 ---
-<Base title={`About · ${site.name}`} active="about" palette={['#2bff88', '#00a3ff', '#030a08']}>
+<Base title={`About · ${site.name}`} active="about" palette={['#2bff88', '#00a3ff', '#030a08']} defaultPalette>
   <section class="a-hero wrap" data-hero>
     <p class="mono dim" data-reveal>About</p>
     <h1 class="display h-xl" data-split data-split-now>Designer.<br />Builder.<br />VJ.</h1>

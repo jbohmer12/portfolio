@@ -342,9 +342,9 @@ const allProjects: Project[] = [
     slug: 'colectivo-under',
     index: '00',
     title: 'Colectivo Under',
-    kicker: 'An underground house music collective in Savannah that started as after parties at my place.',
+    kicker: 'The underground house music collective I founded in Savannah, and the brand that grew around it.',
     summary:
-      'Savannah’s nightlife was missing an underground house scene, so I started one. What began as after parties at my house turned into a recurring party that brought the city’s house DJs together under one name.',
+      'Savannah’s nightlife was missing an underground house scene, so I started one. It began as small private parties and grew into a recurring event that brought the city’s house DJs together under one name.',
     type: 'Founder · Brand · Event design',
     year: '2023–',
     palette: ['#f2efe6', '#ff5a36', '#060606'],
@@ -365,8 +365,8 @@ const allProjects: Project[] = [
         label: 'Why',
         title: 'A scene that wasn’t there',
         body: [
-          'I noticed Savannah’s nightlife was missing an underground house music scene. So I started throwing after parties at my house.',
-          'When those got too big for the house, I reached out to all the house DJs in Savannah and brought them together under one party.',
+          'I noticed Savannah’s nightlife was missing an underground house music scene, so I started hosting small private parties.',
+          'As they grew, I reached out to the house DJs in Savannah and brought them together under one party.',
         ],
       },
       {

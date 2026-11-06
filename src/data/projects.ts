@@ -404,7 +404,7 @@ const allProjects: Project[] = [
         label: 'Merch',
         title: 'Brand you can carry',
         body: [
-          'To get the logo into more hands, I made custom lighters with the Colectivo mark. It’s something people actually keep in their pocket and pull out at every party, so the brand travels on its own.',
+          'To get the logo into more hands, I made 100 custom lighters with the Colectivo mark, printed as UV DTF stickers. I gave them to my staff and close friends and sold the rest at our events. It’s something people actually keep in their pocket and pull out at every party, so the brand travels on its own.',
         ],
         media: [
           { src: '/projects/colectivo-under/merch-lighters.jpg', alt: 'Colectivo Under lighters, white and black' },

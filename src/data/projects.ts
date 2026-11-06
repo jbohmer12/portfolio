@@ -398,6 +398,25 @@ const allProjects: Project[] = [
         ],
       },
       {
+        label: 'The nights',
+        title: 'What it felt like',
+        body: [
+          'From packed warehouse nights to outdoor day parties, the room mattered as much as the flyer. I handled a lot of the lighting myself.',
+          'One of my favorites was a prison break themed Halloween party: orange jumpsuits for the guests and crime scene tape around the booth.',
+        ],
+        media: [
+          { src: '/projects/colectivo-under/night-crowd.jpg', alt: 'A packed night', wide: true },
+          { src: '/projects/colectivo-under/night-beams.jpg', alt: 'Beams and haze' },
+          { src: '/projects/colectivo-under/night-lights.jpg', alt: 'Lighting over the booth' },
+          { src: '/projects/colectivo-under/halloween-tape.jpg', alt: 'Prison break Halloween', caption: 'Prison break Halloween. Photo: Santiago Avella' },
+          { src: '/projects/colectivo-under/halloween-booth.jpg', alt: 'Crime scene tape on the booth', caption: 'Photo: Santiago Avella' },
+          { src: '/projects/colectivo-under/halloween-dj.jpg', alt: 'DJ in a jumpsuit', caption: 'Photo: Santiago Avella' },
+          { src: '/projects/colectivo-under/night-setup.jpg', alt: 'The booth' },
+          { src: '/projects/colectivo-under/day-party.jpg', alt: 'Outdoor day party' },
+          { src: '/projects/colectivo-under/night-booth.jpg', alt: 'Behind the decks' },
+        ],
+      },
+      {
         label: 'Production',
         title: 'Running the night',
         body: [

@@ -180,9 +180,11 @@ const allProjects: Project[] = [
         title: 'Small enough to carry, strong enough to notice',
         body: [
           'The core tension was size versus signal. We built working prototypes with real electronics in a printed housing, so we could test the alerts in hand before committing to a final form.',
+          'The prototype runs on an Arduino Micro driving a small round display and three vibration motors, so an alert can be felt as well as seen.',
         ],
         media: [
           { src: '/projects/step/prototype.jpg', alt: 'Working electronics prototype', fit: 'contain', bg: '#0d0f12' },
+          { src: '/projects/step/firmware.jpg', alt: 'Prototype firmware', caption: 'Prototype firmware: round display plus three vibration motors', fit: 'contain', bg: '#1e1f22' },
           { src: '/projects/step/hologram.jpg', alt: 'Final device render' },
         ],
       },
@@ -355,9 +357,10 @@ const allProjects: Project[] = [
       { k: 'Type', v: 'Nightlife brand + event series' },
     ],
     stats: [
-      { value: '1,000+', label: 'Attendees' },
-      { value: '$20K+', label: 'Revenue' },
-      { value: '3 yrs', label: 'And still running' },
+      { value: '21', label: 'Events in 3 years' },
+      { value: '2,600+', label: 'Tickets sold' },
+      { value: '$26K+', label: 'Net revenue' },
+      { value: '5', label: 'Sold-out nights' },
     ],
     cover: { src: '/projects/colectivo-under/cover.jpg', alt: 'Colectivo Under showcase', wide: true, fit: 'contain', bg: '#000000' },
     sections: [
@@ -402,13 +405,13 @@ const allProjects: Project[] = [
         title: 'What it felt like',
         body: [
           'From packed warehouse nights to outdoor day parties, the room mattered as much as the flyer.',
-          'One of my favorites was a prison break themed Halloween party: orange jumpsuits for the guests and crime scene tape around the booth.',
+          'One of my favorites was Prison Break at Vici Rooftop, one of our first nights. It sold out and became our anniversary theme: orange jumpsuits for the guests and crime scene tape around the booth.',
         ],
         media: [
           { src: '/projects/colectivo-under/night-crowd.jpg', alt: 'A packed night', wide: true },
           { src: '/projects/colectivo-under/night-beams.jpg', alt: 'Beams and haze' },
           { src: '/projects/colectivo-under/night-lights.jpg', alt: 'Lighting over the booth' },
-          { src: '/projects/colectivo-under/halloween-tape.jpg', alt: 'Prison break Halloween', caption: 'Prison break Halloween. Photo: Santiago Avella' },
+          { src: '/projects/colectivo-under/halloween-tape.jpg', alt: 'Prison break Halloween', caption: 'Prison Break at Vici Rooftop. Photo: Santiago Avella' },
           { src: '/projects/colectivo-under/halloween-booth.jpg', alt: 'Crime scene tape on the booth', caption: 'Photo: Santiago Avella' },
           { src: '/projects/colectivo-under/halloween-dj.jpg', alt: 'DJ in a jumpsuit', caption: 'Photo: Santiago Avella' },
           { src: '/projects/colectivo-under/night-setup.jpg', alt: 'The booth' },
@@ -420,7 +423,7 @@ const allProjects: Project[] = [
         label: 'Production',
         title: 'Running the night',
         body: [
-          'Beyond the visuals, I ran everything else too. My job started weeks before each event with the Instagram campaigns that sold the night, and on the night I was always the first one there and the last one to leave.',
+          'Beyond the visuals, I ran everything else too. My job started weeks before each event with the Instagram campaigns that sold the night. Across 21 events our pages pulled close to 30,000 views, and our biggest night, The Opening, sold 281 of 287 tickets. On the night I was always the first one there and the last one to leave.',
         ],
         points: [
           { k: 'Promotion', v: 'Instagram campaigns, plus putting up flyers around the city myself.' },
@@ -493,9 +496,10 @@ const allProjects: Project[] = [
         label: 'Testing',
         title: 'Real riders',
         body: [
-          'We tested the concept with multiple riders and used their feedback to keep developing it.',
+          'We tested the concept with multiple riders and used their feedback to keep developing it. For testing we built a physical prototype, down to the packaging and a quick-start card that walks riders through calibrating the helmet.',
         ],
         media: [
+          { src: '/projects/exalt/prototype-kit.jpg', alt: 'Physical prototype with packaging and quick-start card', fit: 'contain', bg: '#f2f2f0' },
           { src: '/graphic/exalt-poster.jpg', alt: 'Exalt XLR8 poster', fit: 'contain', bg: '#0a0a0c' },
         ],
       },
@@ -548,7 +552,7 @@ export const side: SideProject[] = [
 // ─────────────────────────────────────────────────────────────
 //  Earlier work: school product projects, shown as a compact strip.
 // ─────────────────────────────────────────────────────────────
-export type EarlierProject = { title: string; type: string; year: string; imgs: { src: string; w: number; h: number; alt: string }[]; body: string };
+export type EarlierProject = { title: string; type: string; year: string; imgs: { src: string; w: number; h: number; alt: string; poster?: string }[]; body: string };
 
 export const earlier: EarlierProject[] = [
   {
@@ -566,7 +570,7 @@ export const earlier: EarlierProject[] = [
     type: 'Product · UX · Wearable',
     year: '2024',
     imgs: [
-      { src: '/more/toggle-a.jpg', w: 1920, h: 1200, alt: 'Toggle earpiece and case' },
+      { src: '/more/toggle-vision.mp4', poster: '/more/toggle-vision-poster.jpg', w: 1280, h: 720, alt: 'From the Toggle vision video: pairing the earpiece with the app' },
       { src: '/more/toggle-b.jpg', w: 1920, h: 1080, alt: 'Toggle case open and closed' },
     ],
     body: 'An earpiece that helps people with ADHD focus: tailored work sessions, noise blocking and progress tracking. The tagline was "meant to be deleted," because the goal is to build habits good enough that you stop needing it.',
@@ -592,7 +596,7 @@ export const awards = [
 export const experience = [
   { when: '2025–Now', what: 'Independent product designer & developer', where: 'Redline, Club de lo Roto, client tools' },
   { when: '2025', what: 'UX intern, led product design', where: 'Ooln, AI trading co-pilot' },
-  { when: '2023–Now', what: 'Founder', where: 'Colectivo Under: 1,000+ attendees, $20K+ revenue' },
+  { when: '2023–Now', what: 'Founder', where: 'Colectivo Under: 21 events, 2,600+ tickets, $26K+ revenue' },
   { when: '2022', what: 'Head of visuals & design', where: 'Misfits, audiovisual studio in Cali' },
   { when: '2018', what: 'Media & marketing intern', where: 'KTM North America, Junior Racing Program' },
 ];
@@ -618,10 +622,6 @@ export const graphic: GraphicItem[] = [
   { src: '/graphic/vinyl-photo.jpg', w: 1200, h: 1800, title: 'Off Beat on Time', type: 'Hand-bound book · Vinyl cover' },
   { src: '/graphic/agents-of-change.jpg', w: 1160, h: 873, title: 'Off Beat on Time', type: 'Spread · Agents of Change' },
   { src: '/graphic/offbeat-disco.jpg', w: 2000, h: 1333, title: 'Off Beat on Time', type: 'Printed spread · Disco', span: 'wide' },
-  { src: '/graphic/offbeat-pioneers.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Printed spread · Pioneers' },
   { src: '/graphic/offbeat-stitching.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Hand stitching detail' },
-  { src: '/graphic/offbeat-globalization.jpg', w: 2000, h: 1333, title: 'Off Beat on Time', type: 'Printed spread · Globalization', span: 'wide' },
-  { src: '/graphic/offbeat-spine.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Binding detail' },
   { src: '/graphic/isometric.jpg', w: 1800, h: 1200, title: 'Isometric storefront', type: 'Illustration', span: 'wide' },
-  { src: '/graphic/sunwaves-poster-teal.jpg', w: 1479, h: 2000, title: 'Sunwaves 28', type: 'Festival campaign · Poster' },
 ];

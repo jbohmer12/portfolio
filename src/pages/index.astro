@@ -121,7 +121,9 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
       {earlier.map((e) => (
         <article class="earlier__item" data-reveal>
           <div class="earlier__imgs">
-            {e.imgs.map((im) => <img src={im.src} width={im.w} height={im.h} alt={im.alt} loading="lazy" decoding="async" />)}
+            {e.imgs.map((im) => im.src.endsWith('.mp4')
+              ? <video src={im.src} poster={im.poster} width={im.w} height={im.h} aria-label={im.alt} autoplay muted loop playsinline preload="none"></video>
+              : <img src={im.src} width={im.w} height={im.h} alt={im.alt} loading="lazy" decoding="async" />)}
           </div>
           <div class="earlier__text">
             <h3 class="display earlier__title">{e.title}</h3>
@@ -174,8 +176,8 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
         </div>
       ))}
       <div class="award" data-reveal>
-        <span class="display h-md">1,000+</span>
-        <span class="mono dim">People at the events I founded &amp; produced</span>
+        <span class="display h-md">2,600+</span>
+        <span class="mono dim">Tickets sold at 21 events I founded &amp; produced</span>
       </div>
     </div>
   </section>
@@ -293,7 +295,7 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
   .earlier__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); margin-top: clamp(28px, 4vw, 48px); }
   .earlier__item { display: grid; gap: 18px; align-content: start; }
   .earlier__imgs { display: grid; grid-template-columns: 3fr 2fr; gap: 10px; align-items: stretch; }
-  .earlier__imgs img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; background: var(--bg-2); }
+  .earlier__imgs img, .earlier__imgs video { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; background: var(--bg-2); }
   .earlier__text { display: grid; gap: 8px; }
   .earlier__title { font-size: clamp(24px, 2.4vw, 36px); margin: 0; }
   .earlier__text .mono { margin: 0 0 4px; }

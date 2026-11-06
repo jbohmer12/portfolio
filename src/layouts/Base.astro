@@ -37,14 +37,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script is:inline>
       document.documentElement.classList.add('js');
-      // Light during the day (7am to 7pm, visitor's local time), dark at night.
-      // A manual pick from the toggle wins for the rest of the visit.
-      window.__timeTheme = function () { var h = new Date().getHours(); return h >= 7 && h < 19 ? 'light' : 'dark'; };
+      // Dark by default. A visitor's pick from the toggle is remembered.
       (function () {
         var t;
-        try { t = sessionStorage.getItem('theme'); } catch (e) {}
-        if (t !== 'light' && t !== 'dark') t = window.__timeTheme();
-        document.documentElement.dataset.theme = t;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
     </script>
   </head>
@@ -124,18 +121,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
           b.addEventListener('click', function () {
             root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
-            try { sessionStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+            try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
             paint();
             window.dispatchEvent(new Event('themechange'));
           });
         });
-        // keep following the clock if the visitor hasn't picked a mode
-        setInterval(function () {
-          var picked; try { picked = sessionStorage.getItem('theme'); } catch (e) {}
-          if (picked) return;
-          var t = window.__timeTheme();
-          if (root.dataset.theme !== t) { root.dataset.theme = t; paint(); window.dispatchEvent(new Event('themechange')); }
-        }, 60000);
       })();
     </script>
   </body>

@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import { experience, awards, site } from '../data/projects';
+const tools = ['Figma', 'Framer', 'Adobe Illustrator', 'Lightroom', 'Rhino 3D', 'TouchDesigner', 'Astro', 'JavaScript / TypeScript', 'Supabase', 'Netlify', 'GSAP', 'Three.js', 'Claude Code'];
+---
+<Base title={`About · ${site.name}`} active="about" palette={['#2bff88', '#00a3ff', '#030a08']}>
+  <section class="a-hero wrap" data-hero>
+    <p class="mono dim" data-reveal>About</p>
+    <h1 class="display h-xl" data-split data-split-now>Designer.<br />Builder.<br />VJ.</h1>
+  </section>
+
+  <section class="wrap bio">
+    <p class="lead bio__lead" data-split>
+      From Cali, Colombia, based in Miami. I studied UX design, with a minor in graphic design, at SCAD, and since graduating I’ve been shipping real products.
+    </p>
+    <div class="bio__grid">
+    <figure class="bio__photo" data-reveal>
+      <img src="/about/headshot.jpg" alt="Joaquin Böhmer" loading="lazy" decoding="async" />
+    </figure>
+    <div class="bio__cols">
+      <p class="body-lg" data-reveal>
+        I designed and built Redline, an inventory platform born from contract work for a Miami motorsports dealership. I led product design at Ooln, an AI trading co-pilot startup. I founded Colectivo Under, a nightlife production brand that drew 1,000+ attendees, and I’m building Club de lo Roto, a repair-event series with its own app.
+      </p>
+      <p class="body-lg" data-reveal>
+        Outside product work I perform as a DJ and VJ, building audio-reactive visuals in TouchDesigner and designing my own hardware. That’s where this site’s background comes from: it’s a small live visual patch, and your cursor (or a tap) is the controller.
+      </p>
+    </div>
+    </div>
+  </section>
+
+  <section class="wrap list-sec">
+    <p class="mono dim" data-reveal>Experience</p>
+    <hr class="rule" data-draw />
+    <ul class="xp" role="list">
+      {experience.map((x) => (
+        <li data-reveal>
+          <span class="mono dim">{x.when}</span>
+          <span class="xp__what">{x.what}</span>
+          <span class="dim">{x.where}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap list-sec two">
+    <div>
+      <p class="mono dim" data-reveal>Recognition</p>
+      <hr class="rule" data-draw />
+      <ul class="xp" role="list">
+        {awards.map((a) => (
+          <li data-reveal class="xp--2"><span class="xp__what">{a.name}</span><span class="dim">{a.detail}</span></li>
+        ))}
+        <li data-reveal class="xp--2"><span class="xp__what">SCAD</span><span class="dim">BFA UX Design, minor in Graphic Design, 2025</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="mono dim" data-reveal>Tools</p>
+      <hr class="rule" data-draw />
+      <ul class="tools" role="list">
+        {tools.map((t) => <li data-reveal>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .a-hero { min-height: 90svh; display: flex; flex-direction: column; justify-content: space-between; padding-top: 110px; padding-bottom: 40px; }
+  .a-hero h1 { margin: 0; mix-blend-mode: difference; color: #fff; }
+  .bio { padding-block: clamp(80px, 12vw, 180px); }
+  .bio__lead { font-size: clamp(28px, 3.8vw, 60px); max-width: 24ch; margin: 0 0 clamp(40px, 6vw, 80px); }
+  .bio__grid { display: grid; grid-template-columns: minmax(220px, 0.8fr) 2fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
+  .bio__photo { margin: 0; aspect-ratio: 2/3; overflow: hidden; border-radius: 4px; background: var(--bg-2); }
+  .bio__photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter 0.8s; }
+  .bio__photo:hover img { filter: none; }
+  @media (max-width: 760px) { .bio__grid { grid-template-columns: 1fr; } .bio__photo { max-width: 320px; } }
+  .bio__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
+  .bio__cols p { margin: 0; }
+  @media (max-width: 760px) { .bio__cols { grid-template-columns: 1fr; } }
+
+  .list-sec { padding-block: clamp(40px, 6vw, 80px); }
+  .list-sec .rule { margin-top: 18px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+
+  .xp { list-style: none; margin: 0; padding: 0; }
+  .xp li { display: grid; grid-template-columns: 160px 1fr 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .xp li.xp--2 { grid-template-columns: 1fr 1.4fr; }
+  .xp__what { font-size: clamp(17px, 1.4vw, 22px); font-weight: 600; }
+  @media (max-width: 760px) { .xp li { grid-template-columns: 1fr; gap: 4px; } }
+
+  .tools { list-style: none; margin: 0; padding: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tools li { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+</style>

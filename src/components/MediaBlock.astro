@@ -1,0 +1,33 @@
+---
+import type { Media } from '../data/projects';
+interface Props { media: Media; palette: [string, string, string]; parallax?: boolean }
+const { media, palette, parallax = false } = Astro.props;
+const isVideo = media.src && /\.(mp4|webm)$/i.test(media.src);
+const px = parallax && !media.src ? '0.08' : undefined; // real images show uncropped, no parallax
+const caption = media.caption ?? (media.src ? media.alt : undefined);
+---
+<figure class:list={['fig', { 'fig--wide': media.wide }]} data-reveal>
+  <div class:list={['media', { 'media--wide': media.wide, 'media--contain': media.fit === 'contain', 'media--natural': !!media.src && media.fit !== 'contain' }]} style={`--p1:${palette[0]};--p2:${palette[1]};--p3:${palette[2]};${media.bg ? `background:${media.bg};` : ''}`}>
+    {media.src ? (
+      isVideo ? (
+        <video src={media.src} autoplay muted loop playsinline aria-label={media.alt} data-parallax={px}></video>
+      ) : (
+        <img src={media.src} alt={media.alt} loading="lazy" decoding="async" data-parallax={px} />
+      )
+    ) : (
+      <>
+        <div class="gen" data-parallax={parallax ? '0.08' : undefined}></div>
+        <span class="media__tag">{media.alt}</span>
+      </>
+    )}
+  </div>
+  {caption && <figcaption class="mono dim">{caption}</figcaption>}
+</figure>
+
+<style>
+  .fig { margin: 0; display: grid; gap: 10px; }
+  .media img, .media video { transform: scale(1.12); }
+  .media--natural { aspect-ratio: auto; }
+  .media--natural img, .media--natural video { height: auto; transform: none; }
+  .media--contain img, .media--contain video { object-fit: contain; transform: none; padding: clamp(16px, 3vw, 40px); }
+</style>

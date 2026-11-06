@@ -1,0 +1,161 @@
+---
+import Base from '../../layouts/Base.astro';
+import MediaBlock from '../../components/MediaBlock.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { project: p, next: projects[(i + 1) % projects.length] },
+  }));
+}
+const { project: p, next } = Astro.props as { project: Project; next: Project };
+---
+<Base title={`${p.title} · Joaquin Böhmer`} description={p.summary} palette={p.palette} active="work">
+  <article style={`--p1:${p.palette[0]};--p2:${p.palette[1]};--p3:${p.palette[2]}`}>
+    <!-- head -->
+    <header class="cs-hero wrap" data-hero>
+      <div class="cs-hero__top mono">
+        <a href="/#work" class="back">← All work</a>
+        <span>{p.index} / {String(projects.length).padStart(2, '0')}</span>
+      </div>
+      {p.award && <p class="award-chip mono" data-reveal>★ {p.award}</p>}
+      <h1 class="display h-xl cs-title" data-split data-split-now>{p.title}</h1>
+      <p class="lead cs-kicker" data-reveal>{p.kicker}</p>
+    </header>
+
+    <!-- meta -->
+    <section class="wrap">
+      <hr class="rule" data-draw />
+      <dl class="meta">
+        {p.meta.map((m) => (
+          <div data-reveal>
+            <dt class="mono dim">{m.k}</dt>
+            <dd>{m.v}</dd>
+          </div>
+        ))}
+      </dl>
+      <hr class="rule" data-draw />
+    </section>
+
+    <!-- cover -->
+    <section class="wrap cover">
+      <MediaBlock media={{ ...p.cover, wide: true }} palette={p.palette} parallax />
+    </section>
+
+    <!-- stats -->
+    {p.stats && (
+      <section class="wrap stats">
+        {p.stats.map((s) => (
+          <div class="stat" data-reveal>
+            <span class="display h-lg">{s.value}</span>
+            <span class="mono dim">{s.label}</span>
+          </div>
+        ))}
+      </section>
+    )}
+
+    <!-- summary -->
+    <section class="wrap summary">
+      <p class="mono dim" data-reveal>Overview</p>
+      <p class="lead summary__text" data-split>{p.summary}</p>
+    </section>
+
+    <!-- sections -->
+    {p.sections.map((s) => (
+      <section class="wrap chapter">
+        <div class="chapter__label">
+          <p class="mono" data-reveal>{s.label}</p>
+        </div>
+        <div class="chapter__body">
+          <h2 class="display h-md chapter__title" data-split>{s.title}</h2>
+          {s.body.map((para) => <p class="body-lg" data-reveal>{para}</p>)}
+          {s.points && (
+            <ul class="points" role="list">
+              {s.points.map((pt) => (
+                <li data-reveal>
+                  <span class="points__k">{pt.k}</span>
+                  <span class="dim">{pt.v}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {s.media && (
+          <div class="chapter__media">
+            {s.media.map((m) => <MediaBlock media={m} palette={p.palette} />)}
+          </div>
+        )}
+      </section>
+    ))}
+
+    {p.link && (
+      <section class="wrap" style="padding-top: 40px">
+        <a class="btn btn--solid" href={p.link.href} target="_blank" rel="noopener">Visit {p.link.label} <span class="arrow">↗</span></a>
+      </section>
+    )}
+
+    <!-- next -->
+    <section class="wrap next">
+      <hr class="rule" data-draw />
+      <a href={`/work/${next.slug}`} class="next__link" style={`--n1:${next.palette[0]}`}>
+        <span class="mono dim">Next project</span>
+        <span class="display h-xl next__title">{next.title}</span>
+        <span class="dim">{next.kicker}</span>
+      </a>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .cs-hero { min-height: 92svh; display: flex; flex-direction: column; padding-top: 84px; padding-bottom: 40px; }
+  .cs-hero__top { display: flex; justify-content: space-between; color: var(--fg-dim); }
+  .back:hover { color: var(--fg); }
+  .award-chip {
+    margin: auto 0 18px; align-self: start; padding: 8px 14px; border: 1px solid #ffd23f; color: #ffd23f; border-radius: 999px;
+  }
+  .cs-title { margin: 0; mix-blend-mode: difference; color: #fff; }
+  .award-chip + .cs-title { margin-top: 0; }
+  .cs-hero__top + .cs-title { margin-top: auto; }
+  .cs-kicker { margin: 28px 0 0; max-width: 26ch; }
+
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 0; padding: 28px 0; }
+  .meta dt { margin-bottom: 8px; }
+  .meta dd { margin: 0; font-size: clamp(15px, 1.2vw, 18px); }
+  @media (max-width: 760px) { .meta { grid-template-columns: 1fr 1fr; } }
+
+  .cover { padding-block: clamp(40px, 6vw, 80px); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; padding-block: clamp(40px, 6vw, 80px); }
+  .stat { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .stat .display { color: var(--p1); }
+
+  .summary { padding-block: clamp(80px, 12vw, 180px); }
+  .summary__text { font-size: clamp(28px, 3.8vw, 60px); max-width: 24ch; margin-top: 24px; }
+
+  .chapter {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px clamp(12px, 1.6vw, 24px);
+    padding-block: clamp(60px, 9vw, 130px); border-top: 1px solid var(--line);
+  }
+  .chapter__label { grid-column: 1 / span 3; }
+  .chapter__label p { position: sticky; top: 90px; margin: 0; color: var(--p1); }
+  .chapter__body { grid-column: 5 / span 8; display: grid; gap: 22px; align-content: start; }
+  .chapter__title { margin: 0 0 10px; max-width: 18ch; }
+  .chapter__body .body-lg { margin: 0; }
+  .chapter__media { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 24px); margin-top: clamp(20px, 4vw, 60px); }
+  .chapter__media :global(.fig--wide) { grid-column: 1 / -1; }
+  @media (max-width: 860px) {
+    .chapter__label, .chapter__body { grid-column: 1 / -1; }
+    .chapter__media { grid-template-columns: 1fr; }
+  }
+
+  .points { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .points li { display: grid; grid-template-columns: minmax(160px, 1fr) 2fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .points__k { font-weight: 600; }
+  @media (max-width: 560px) { .points li { grid-template-columns: 1fr; gap: 4px; } }
+
+  .next { padding-top: clamp(100px, 14vw, 200px); }
+  .next__link { display: grid; gap: 16px; padding-top: 32px; }
+  .next__title { transition: color 0.5s var(--ease-out), transform 0.7s var(--ease-out); transform-origin: left; }
+  .next__link:hover .next__title { color: var(--n1); transform: translateX(2vw); }
+</style>

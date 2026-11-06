@@ -1,0 +1,99 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '../styles/global.css';
+import { site } from '../data/projects';
+
+interface Props {
+  title?: string;
+  description?: string;
+  palette?: [string, string, string];
+  active?: 'work' | 'about' | 'home';
+}
+const {
+  title = `${site.name} · ${site.role}`,
+  description = 'Designer in Miami working across product, graphic and web design. Research, design and working code.',
+  palette,
+  active = 'home',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#08080a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body data-palette={palette?.join(',')}>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="curtain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <header class="nav mono">
+      <a href="/" class="nav__brand" aria-label="Home">
+        <span>{site.name}</span>
+      </a>
+      <span class="nav__status"><i class="dot"></i>Open to work</span>
+      <nav class="nav__links" aria-label="Main">
+        <a href="/#work" aria-current={active === 'work' ? 'page' : undefined}>Work</a>
+        <a href="/about" aria-current={active === 'about' ? 'page' : undefined}>About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav__menu" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="nav__menu-label">Menu</span>
+        <span class="burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </header>
+
+    <!-- mobile menu -->
+    <div class="menu" id="menu" aria-hidden="true" data-menu>
+      <nav class="menu__links" aria-label="Mobile">
+        <a href="/#work" class="display"><span class="mono">01</span>Work</a>
+        <a href="/about" class="display"><span class="mono">02</span>About</a>
+        <a href="#contact" class="display"><span class="mono">03</span>Contact</a>
+      </nav>
+      <div class="menu__foot mono">
+        <span class="nav__status"><i class="dot"></i>Open to work</span>
+        <div class="menu__social">
+          <a href={`mailto:${site.email}`}>Email</a>
+          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a href={site.github} target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="page">
+      <slot />
+    </main>
+
+    <footer class="footer wrap page" id="contact">
+      <p class="mono dim" data-reveal>Let’s work together</p>
+      <a class="footer__big" href={`mailto:${site.email}`}>
+        <h2 class="display h-xl" data-split>Get in<br />touch ↗</h2>
+      </a>
+      <div class="footer__row">
+        <div class="footer__links" data-reveal>
+          <a class="btn btn--solid" href={site.calendar} target="_blank" rel="noopener">Book a call <span class="arrow">↗</span></a>
+          <a class="btn" href={site.linkedin} target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+          <a class="btn" href={site.github} target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+          {site.resume && <a class="btn" href={site.resume} target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>}
+        </div>
+        <p class="mono dim" data-reveal>© {new Date().getFullYear()} {site.name}. Designed and coded by me.</p>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

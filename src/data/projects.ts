@@ -619,7 +619,7 @@ export const graphic: GraphicItem[] = [
   { src: '/graphic/agents-of-change.jpg', w: 1160, h: 873, title: 'Off Beat on Time', type: 'Spread · Agents of Change' },
   { src: '/graphic/offbeat-disco.jpg', w: 2000, h: 1333, title: 'Off Beat on Time', type: 'Printed spread · Disco', span: 'wide' },
   { src: '/graphic/offbeat-pioneers.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Printed spread · Pioneers' },
-  { src: '/graphic/offbeat-stitching.jpg', w: 2000, h: 1333, title: 'Off Beat on Time', type: 'Hand stitching detail' },
+  { src: '/graphic/offbeat-stitching.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Hand stitching detail' },
   { src: '/graphic/offbeat-globalization.jpg', w: 2000, h: 1333, title: 'Off Beat on Time', type: 'Printed spread · Globalization', span: 'wide' },
   { src: '/graphic/offbeat-spine.jpg', w: 1333, h: 2000, title: 'Off Beat on Time', type: 'Binding detail' },
   { src: '/graphic/isometric.jpg', w: 1800, h: 1200, title: 'Isometric storefront', type: 'Illustration', span: 'wide' },

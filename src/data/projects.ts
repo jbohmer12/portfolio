@@ -424,7 +424,7 @@ const allProjects: Project[] = [
         ],
         points: [
           { k: 'Promotion', v: 'Instagram campaigns, plus putting up flyers around the city myself.' },
-          { k: 'Curation', v: 'Building each lineup around local DJs and guests.' },
+          { k: 'Curation', v: 'Building each lineup around local DJs, plus international bookings.' },
           { k: 'Production', v: 'Venues, budgets and settlements.' },
           { k: 'Lighting', v: 'Designing the light for each room.' },
           { k: 'Door', v: 'Checking people in, often myself.' },

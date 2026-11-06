@@ -128,7 +128,7 @@ const { project: p, next } = Astro.props as { project: Project; next: Project };
 
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; padding-block: clamp(40px, 6vw, 80px); }
   .stat { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
-  .stat .display { color: var(--p1); }
+  .stat .display { color: var(--p1); font-size: clamp(40px, 4.4vw, 80px); white-space: nowrap; }
 
   .summary { padding-block: clamp(80px, 12vw, 180px); }
   .summary__text { font-size: clamp(28px, 3.8vw, 60px); max-width: 24ch; margin-top: 24px; }

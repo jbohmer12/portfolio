@@ -344,7 +344,7 @@ const allProjects: Project[] = [
     title: 'Colectivo Under',
     kicker: 'The underground house music collective I founded in Savannah, and the brand that grew around it.',
     summary:
-      'Savannah’s nightlife was missing an underground house scene, so I started one. It began as small private parties and grew into a recurring event that brought the city’s house DJs together under one name.',
+      'What started as a few private parties became Savannah’s home for underground house music. I built the brand, designed every flyer and ran the nights myself.',
     type: 'Founder · Brand · Event design',
     year: '2023–',
     palette: ['#f2efe6', '#ff5a36', '#060606'],
@@ -401,7 +401,7 @@ const allProjects: Project[] = [
         label: 'The nights',
         title: 'What it felt like',
         body: [
-          'From packed warehouse nights to outdoor day parties, the room mattered as much as the flyer. I handled a lot of the lighting myself.',
+          'From packed warehouse nights to outdoor day parties, the room mattered as much as the flyer.',
           'One of my favorites was a prison break themed Halloween party: orange jumpsuits for the guests and crime scene tape around the booth.',
         ],
         media: [
@@ -420,15 +420,14 @@ const allProjects: Project[] = [
         label: 'Production',
         title: 'Running the night',
         body: [
-          'Beyond the visuals I ran the whole thing. My job started weeks before each event, putting up flyers around the city myself. Then curating the lineup, producing the night, a bit of lighting design, and even working the door. I was always the first one there and the last one to leave.',
+          'Beyond the visuals, I ran everything else too. My job started weeks before each event, and on the night I was always the first one there and the last one to leave.',
         ],
         points: [
-          { k: 'Promotion', v: 'Putting up flyers around the city weeks before each event.' },
-          { k: 'Curation', v: 'Building lineups around Savannah’s house DJs and guests.' },
-          { k: 'Production', v: 'Venues, budgets, settlements and the night itself.' },
-          { k: 'Lighting', v: 'Setting the mood of the room, not just the flyer.' },
-          { k: 'Door', v: 'Checking people in and setting the tone from the first minute.' },
-          { k: 'Brand', v: 'Logo, flyers, artist cards, merch and social.' },
+          { k: 'Promotion', v: 'Putting up flyers around the city myself.' },
+          { k: 'Curation', v: 'Building each lineup around local DJs and guests.' },
+          { k: 'Production', v: 'Venues, budgets and settlements.' },
+          { k: 'Lighting', v: 'Designing the light for each room.' },
+          { k: 'Door', v: 'Checking people in, often myself.' },
         ],
         media: [
           { src: '/projects/colectivo-under/return-to-sender.jpg', alt: 'Return to Sender', fit: 'contain', bg: '#000000' },

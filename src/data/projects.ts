@@ -49,7 +49,7 @@ const allProjects: Project[] = [
     title: 'Redline',
     kicker: 'The system I built to dig a dealership out of a shipping container of parts, and then turned into a product.',
     summary:
-      'I was hired to sort a container of motorcycle parts and get them on eBay. Doing it by hand took about a dozen steps per part, so I built software that does it in under a minute.',
+      'I was hired to get a container of motorcycle parts onto eBay. I ended up building the software that does it, and now I’m turning it into a product for powersports dealers.',
     type: 'Product design · Full-stack',
     year: '2025–',
     palette: ['#ff2a2a', '#ff8a00', '#14060a'],
@@ -125,7 +125,7 @@ const allProjects: Project[] = [
     slug: 'step',
     index: '02',
     title: 'STEP',
-    kicker: 'A pedestrian-safety wearable and companion app. Red Dot Junior Award.',
+    kicker: 'A pedestrian-safety wearable and companion app.',
     summary:
       'A discreet GPS-enabled device and app that alerts pedestrians to hazards and improves communication between people on foot and drivers.',
     type: 'Product · UX · Industrial',
@@ -142,7 +142,7 @@ const allProjects: Project[] = [
     sections: [
       {
         label: 'Problem',
-        title: 'Streets fail the people walking on them.',
+        title: 'Streets fail the people walking on them',
         body: [
           'Many pedestrian accidents come down to poor infrastructure and a lack of communication between drivers and pedestrians. The brief we set ourselves: make the moment of crossing safer, with both sides more aware of each other.',
           // TODO(add): one real stat + the research you did (interviews, observation, testing)
@@ -150,7 +150,7 @@ const allProjects: Project[] = [
       },
       {
         label: 'Concept',
-        title: 'Real-time hazard alerts you can feel.',
+        title: 'Hazard alerts you can feel',
         body: [
           'STEP pairs small, portable devices with a companion app. GPS and app connectivity drive real-time hazard detection and alerts, so people are warned without having to stare at a phone.',
         ],
@@ -163,7 +163,7 @@ const allProjects: Project[] = [
       },
       {
         label: 'System',
-        title: 'One system for both sides of the crosswalk.',
+        title: 'One system for both sides of the crosswalk',
         body: [
           // TODO(verify): confirm how the driver unit and pedestrian device talk to each other
           'The system covers both people in the moment that matters: a pedestrian device, a driver-side unit, and an app that handles onboarding and trip history.',
@@ -177,7 +177,7 @@ const allProjects: Project[] = [
       },
       {
         label: 'Iteration',
-        title: 'Small enough to carry. Strong enough to notice.',
+        title: 'Small enough to carry, strong enough to notice',
         body: [
           'The core tension was size versus signal. We built working prototypes with real electronics in a printed housing, so we could test the alerts in hand before committing to a final form.',
         ],
@@ -188,7 +188,7 @@ const allProjects: Project[] = [
       },
       {
         label: 'Outcome',
-        title: 'Recognized by Red Dot.',
+        title: 'Recognized by Red Dot',
         body: [
           'STEP won a Red Dot in 2025, one of the most recognized international design awards for emerging designers.',
         ],
@@ -201,7 +201,7 @@ const allProjects: Project[] = [
     title: 'Ooln',
     kicker: 'One of two designers at an early AI trading startup, doing whatever needed design.',
     summary:
-      'Ooln was a small startup building an AI co-pilot for traders. My senior-project partner and I were the only designers, working straight with the engineers and the CEOs on a tight budget and a fast pace.',
+      'Ooln was a small startup building an AI co-pilot for traders. I worked on everything from the product itself to the logo, landing pages and trailers.',
     type: 'Product · Brand · Growth',
     year: '2025',
     palette: ['#9b5cff', '#c98bff', '#0a0614'],
@@ -254,7 +254,7 @@ const allProjects: Project[] = [
     title: 'Club de lo Roto',
     kicker: 'My take on the repair café: a Miami event series for fixing broken things, and the app that runs it.',
     summary:
-      'A passion project about keeping things alive. I wanted repair events that feel like something you’d actually want to go to, and an app that makes the day a little more interactive.',
+      'Repair events that feel like something you’d actually want to go to, with a brand, a website and an app built around them.',
     type: 'Founder · Brand · Product',
     year: '2026–',
     palette: ['#ddb641', '#f0d27a', '#0f0c03'],
@@ -460,7 +460,7 @@ const allProjects: Project[] = [
         label: 'The ask',
         title: 'Coaching at 120 mph',
         body: [
-          'Track riders learn by feel and by whatever a coach can tell them between sessions. We wanted to put several technologies into one wearable that pairs with both the motorcycle and a companion app, so riders get metrics and feedback while they ride.',
+          'Track riders learn by feel and by whatever a coach can tell them between sessions. We wanted to give them metrics and feedback in the moment, without changing how they ride.',
         ],
       },
       {
@@ -493,7 +493,7 @@ const allProjects: Project[] = [
         label: 'Testing',
         title: 'Real riders',
         body: [
-          'We tested the concept with multiple riders and used their feedback to keep developing it. The project won an Indigo Design Award in 2025.',
+          'We tested the concept with multiple riders and used their feedback to keep developing it.',
         ],
         media: [
           { src: '/graphic/exalt-poster.jpg', alt: 'Exalt XLR8 poster', fit: 'contain', bg: '#0a0a0c' },
@@ -608,7 +608,6 @@ export const graphic: GraphicItem[] = [
   { src: '/graphic/jack-spread-1.jpg', w: 2400, h: 729, title: 'In The Beginning (There Was Jack)', type: 'Editorial spread', span: 'full' },
   { src: '/graphic/sunwaves-poster.jpg', w: 1479, h: 2000, title: 'Sunwaves 28', type: 'Festival campaign · Poster' },
   { src: '/graphic/found-on-39th.jpg', w: 1080, h: 1350, title: 'Found on 39th', type: 'Pop-up poster' },
-  { src: '/graphic/exalt-poster.jpg', w: 1408, h: 2112, title: 'Exalt XLR8', type: 'Product poster' },
   { src: '/graphic/sunwaves-banner.jpg', w: 2400, h: 1318, title: 'Sunwaves 28', type: 'Festival campaign · Banner', span: 'wide' },
   { src: '/graphic/salomon-function.jpg', w: 1600, h: 900, title: 'Salomon FSF case study', type: 'Presentation design', span: 'wide' },
   { src: '/graphic/valentines.jpg', w: 1147, h: 1529, title: 'Valentine’s Day Pop-up', type: 'Event poster' },

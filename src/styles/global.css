@@ -222,7 +222,7 @@ a:hover .arrow { transform: translate(3px, -3px); }
 }
 
 /* ───────── Footer / contact ───────── */
-.footer { padding: clamp(80px, 14vw, 200px) 0 28px; position: relative; overflow: hidden; }
+.footer { padding-top: clamp(80px, 14vw, 200px); padding-bottom: 28px; position: relative; overflow: hidden; }
 .footer__big { display: block; }
 .footer__big:hover .display { color: var(--accent); }
 .footer__big .display { transition: color 0.4s var(--ease-out); }

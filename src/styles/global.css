@@ -228,3 +228,35 @@ a:hover .arrow { transform: translate(3px, -3px); }
 .footer__big .display { transition: color 0.4s var(--ease-out); }
 .footer__row { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; align-items: end; margin-top: clamp(40px, 6vw, 80px); }
 .footer__links { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ───────── Light theme ───────── */
+:root[data-theme='light'] {
+  --bg: #f3f1ea;
+  --bg-2: #e7e4dc;
+  --fg: #111113;
+  --fg-dim: #6a6863;
+  --fg-faint: #c8c5bd;
+  --line: rgba(17, 17, 19, 0.14);
+  color-scheme: light;
+}
+/* the shader is built for black; invert it and rotate the hue back so lines keep their color */
+:root[data-theme='light'] #gl { filter: invert(1) hue-rotate(180deg) saturate(1.1); }
+/* palette colors used as text get darkened so they stay readable on paper */
+:root[data-theme='light'] .stat .display,
+:root[data-theme='light'] .chapter__label p,
+:root[data-theme='light'] .row:hover .row__title,
+:root[data-theme='light'] .row.is-active .row__title { color: color-mix(in srgb, var(--p1) 55%, #000); }
+:root[data-theme='light'] .next__link:hover .next__title { color: color-mix(in srgb, var(--n1) 55%, #000); }
+:root[data-theme='light'] .hero__lead em { color: color-mix(in srgb, var(--c1) 70%, #000); }
+:root[data-theme='light'] .award-chip,
+:root[data-theme='light'] .tag { color: #9a6b00; border-color: #9a6b00; }
+:root[data-theme='light'] .dot { background: #12a85a; }
+
+/* theme toggle */
+.theme-toggle { display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-mono); font-size: 11px; }
+.theme-toggle__icon { width: 11px; height: 11px; border-radius: 50%; border: 1px solid currentColor; background: linear-gradient(90deg, currentColor 50%, transparent 50%); transition: transform 0.6s var(--ease); }
+:root[data-theme='light'] .theme-toggle__icon { transform: rotate(180deg); }
+/* big titles use a difference blend for dark mode; on paper just draw them in ink */
+:root[data-theme='light'] .hero__title,
+:root[data-theme='light'] .cs-title,
+:root[data-theme='light'] .a-hero h1 { color: var(--fg); mix-blend-mode: normal; }

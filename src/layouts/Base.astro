@@ -33,7 +33,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta name="theme-color" content="#08080a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      (function () {
+        var t;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
   </head>
   <body data-palette={palette?.join(',')}>
     <canvas id="gl" aria-hidden="true"></canvas>
@@ -48,6 +56,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a href="/#work" aria-current={active === 'work' ? 'page' : undefined}>Work</a>
         <a href="/about" aria-current={active === 'about' ? 'page' : undefined}>About</a>
         <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" data-theme-toggle><i class="theme-toggle__icon" aria-hidden="true"></i><span data-theme-label>Light</span></button>
       </nav>
       <button class="nav__menu" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span class="nav__menu-label">Menu</span>
@@ -64,6 +73,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       </nav>
       <div class="menu__foot mono">
         <span class="nav__status"><i class="dot"></i>Open to work</span>
+        <button class="theme-toggle" type="button" data-theme-toggle><i class="theme-toggle__icon" aria-hidden="true"></i><span data-theme-label>Light</span></button>
         <div class="menu__social">
           <a href={`mailto:${site.email}`}>Email</a>
           <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
@@ -94,6 +104,26 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     <script>
       import '../scripts/main.ts';
+    </script>
+      <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var meta = document.querySelector('meta[name="theme-color"]');
+        function paint() {
+          var light = root.dataset.theme === 'light';
+          document.querySelectorAll('[data-theme-label]').forEach(function (el) { el.textContent = light ? 'Dark' : 'Light'; });
+          document.querySelectorAll('[data-theme-toggle]').forEach(function (b) { b.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode'); });
+          if (meta) meta.setAttribute('content', light ? '#f3f1ea' : '#08080a');
+        }
+        paint();
+        document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+            try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+            paint();
+          });
+        });
+      })();
     </script>
   </body>
 </html>

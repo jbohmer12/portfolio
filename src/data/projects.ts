@@ -401,6 +401,17 @@ const allProjects: Project[] = [
         ],
       },
       {
+        label: 'Merch',
+        title: 'Brand you can carry',
+        body: [
+          'To get the logo into more hands, I made custom lighters with the Colectivo mark. It’s something people actually keep in their pocket and pull out at every party, so the brand travels on its own.',
+        ],
+        media: [
+          { src: '/projects/colectivo-under/merch-lighters.jpg', alt: 'Colectivo Under lighters, white and black' },
+          { src: '/projects/colectivo-under/merch-batch.jpg', alt: 'A batch of finished lighters' },
+        ],
+      },
+      {
         label: 'The nights',
         title: 'What it felt like',
         body: [

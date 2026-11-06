@@ -347,7 +347,7 @@ const allProjects: Project[] = [
       'What started as a few private parties became Savannah’s home for underground house music. I built the brand, designed every flyer and ran the nights myself.',
     type: 'Founder · Brand · Event design',
     year: '2023–',
-    palette: ['#f2efe6', '#ff5a36', '#060606'],
+    palette: ['#f2efe6', '#ffffff', '#050505'],
     meta: [
       { k: 'Role', v: 'Founder · brand · production' },
       { k: 'Timeline', v: '2023–Present' },

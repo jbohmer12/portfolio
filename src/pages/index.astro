@@ -96,14 +96,14 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
     <div class="side__grid">
       {side.map((sp) => (
         <article class="side__item" data-reveal>
-          <a href={sp.link.href} target="_blank" rel="noopener" class:list={['side__img', { 'side__img--contain': !!sp.bg }]} style={sp.bg ? `background:${sp.bg}` : undefined}>
+          <a href={sp.link?.href ?? sp.img} target={sp.link ? '_blank' : undefined} rel="noopener" class:list={['side__img', { 'side__img--contain': !!sp.bg }]} style={sp.bg ? `background:${sp.bg}` : undefined}>
             <img src={sp.img} width={sp.w} height={sp.h} alt={`${sp.title} screenshot`} loading="lazy" decoding="async" />
           </a>
           <div class="side__text">
             <h3 class="display side__title">{sp.title}</h3>
             <p class="mono dim">{sp.type}</p>
             {sp.body.map((b) => <p class="side__body">{b}</p>)}
-            <a class="btn" href={sp.link.href} target="_blank" rel="noopener">{sp.link.label} <span class="arrow">↗</span></a>
+            {sp.link ? <a class="btn" href={sp.link.href} target="_blank" rel="noopener">{sp.link.label} <span class="arrow">↗</span></a> : <span class="mono dim">In use by a client · Private</span>}
           </div>
         </article>
       ))}

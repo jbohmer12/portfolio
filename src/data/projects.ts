@@ -491,18 +491,17 @@ export const projects: Project[] = order
 // ─────────────────────────────────────────────────────────────
 //  Side projects: small things I built for myself.
 // ─────────────────────────────────────────────────────────────
-export type SideProject = { title: string; type: string; img: string; w: number; h: number; bg?: string; body: string[]; link: { label: string; href: string } };
+export type SideProject = { title: string; type: string; img: string; w: number; h: number; bg?: string; body: string[]; link?: { label: string; href: string } };
 
 export const side: SideProject[] = [
   {
-    title: 'Calorie Tracker',
+    title: 'Ctrl+Bill',
     type: 'Web app · Client tool',
-    img: '/side/caltracker-charts.jpg', w: 1512, h: 792, bg: '#141917',
+    img: '/side/ctrl-bill.jpg', w: 2000, h: 1018, bg: '#f3eee6',
     body: [
-      'A simple tracker I built for a client, who has used it every week since. Log what you eat and what you burn at any time of day, and it works out your deficit and an estimate of fat burned.',
-      'The charts show the last two weeks at a glance, so progress is easy to see without doing any math. Everything is saved in the browser, so there is no account to set up.',
+      'Paste the week, get the invoice. I built this for a client who runs a cleaning team: they paste the schedule their team already writes, and it sorts every property into its price tier, totals the bill and keeps a log of who cleaned what.',
+      'Pricing tiers are editable, reports export to CSV, and past weeks are saved. They have used it every week since I built it.',
     ],
-    link: { label: 'Try it', href: 'https://caltracker.netlify.app/' },
   },
   {
     title: 'SF Day Guide',

@@ -579,9 +579,11 @@ const allProjects: Project[] = [
           'It’s two printed parts: a one-piece shell and a tray. Four screws from below go into brass inserts, and once they’re out the shell lifts straight off. The main board stays on the tray, and every knob, switch and jack can be reached from inside. Four bar magnets sit under a felt pad on the back.',
         ],
         media: [
-          { src: '/projects/tri-band-isolator/exploded.jpg', alt: 'Exploded view: shell lifted off the tray and board', fit: 'contain', bg: '#ffffff' },
-          { src: '/projects/tri-band-isolator/inside.jpg', alt: 'Inside the shell with panel-mounted pots and jacks', fit: 'contain', bg: '#ffffff' },
-          { src: '/projects/tri-band-isolator/back.jpg', alt: 'Back with the felt pad over the magnets', wide: true },
+          { src: '/projects/tri-band-isolator/exploded-hero.jpg', alt: 'Exploded view: knobs, shell, board, tray and screws' },
+          { src: '/projects/tri-band-isolator/exploded-front.jpg', alt: 'Exploded view from the front' },
+          { src: '/projects/tri-band-isolator/exploded-side.jpg', alt: 'Exploded view from the input side', wide: true },
+          { src: '/projects/tri-band-isolator/exploded-magnets.jpg', alt: 'Exploded view from the back, showing the magnets and felt pad' },
+          { src: '/projects/tri-band-isolator/back-43.jpg', alt: 'Back with the felt pad over the magnets' },
         ],
       },
       {

@@ -228,9 +228,9 @@ export function initSignal(canvas: HTMLCanvasElement, initial?: Palette) {
     bands.high += (high - bands.high) * 0.08;
     uniforms.uBands.value.set(bands.low, bands.mid, bands.high);
 
-    uniforms.uC1.value.lerp(target.c1, 0.05);
-    uniforms.uC2.value.lerp(target.c2, 0.05);
-    uniforms.uC3.value.lerp(target.c3, 0.05);
+    uniforms.uC1.value.lerp(target.c1, coarse ? 0.03 : 0.05);
+    uniforms.uC2.value.lerp(target.c2, coarse ? 0.03 : 0.05);
+    uniforms.uC3.value.lerp(target.c3, coarse ? 0.03 : 0.05);
     uniforms.uIntensity.value += (targetIntensity - uniforms.uIntensity.value) * 0.06;
 
     for (const el of meters) {

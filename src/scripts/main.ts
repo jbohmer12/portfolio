@@ -204,21 +204,46 @@ if (menuBtn && menu) {
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 }
 
-// ── Touch: project rows activate as they cross the middle of the screen ─
+// ── Touch: the project crossing the middle of the screen is highlighted ─
 if (rows.length && !fine) {
-  rows.forEach((row) => {
-    const pal = row.dataset.palette!.split(',') as [string, string, string];
-    ScrollTrigger.create({
-      trigger: row, start: 'top 55%', end: 'bottom 45%',
-      onToggle: (st) => {
-        row.classList.toggle('is-active', st.isActive);
-        if (st.isActive) { atBase = false; signalProxy.setPalette(pal); signalProxy.setIntensity(0.3); }
-      },
-      onLeaveBack: () => { atBase = true; signalProxy.setPalette(basePaletteFor()); },
+  const list = document.querySelector<HTMLElement>('.work__list');
+  const pals = [...rows].map((r) => r.dataset.palette!.split(',') as [string, string, string]);
+  let active = -1;
+  const setActive = (i: number) => {
+    if (i === active) return;
+    if (active >= 0) rows[active].classList.remove('is-active');
+    active = i;
+    list?.classList.toggle('has-active', i >= 0);
+    if (i >= 0) {
+      rows[i].classList.add('is-active');
+      atBase = false; signalProxy.setPalette(pals[i]); signalProxy.setIntensity(0.3);
+    } else {
+      atBase = true; signalProxy.setPalette(basePaletteFor()); signalProxy.setIntensity(0.12);
+    }
+  };
+  let queued = false;
+  const pick = () => {
+    queued = false;
+    const mid = window.innerHeight * 0.5;
+    const first = rows[0].getBoundingClientRect(), last = rows[rows.length - 1].getBoundingClientRect();
+    // outside the list (above the first row or past the last one): nothing lit
+    if (first.top > mid || last.bottom < mid) return setActive(-1);
+    let best = -1, bestD = Infinity, curD = Infinity;
+    rows.forEach((r, i) => {
+      const box = r.getBoundingClientRect();
+      const d = box.top <= mid && box.bottom >= mid ? 0 : Math.min(Math.abs(box.top - mid), Math.abs(box.bottom - mid));
+      if (d < bestD) { bestD = d; best = i; }
+      if (i === active) curD = d;
     });
-  });
-  const list = document.querySelector('.work__list');
-  if (list) ScrollTrigger.create({ trigger: list, start: 'top 55%', end: 'bottom 45%', onToggle: (st) => { list.classList.toggle('has-active', st.isActive); if (!st.isActive) signalProxy.setIntensity(0.12); } });
+    // hysteresis: only hand over once the new row clearly owns the middle
+    if (active >= 0 && best !== active && curD - bestD < 24) return;
+    setActive(best);
+  };
+  const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(pick); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  lenis?.on('scroll', onScroll);
+  pick();
 }
 
 // ── Page transitions (curtain) ─────────────────────────────

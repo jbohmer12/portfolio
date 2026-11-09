@@ -516,9 +516,87 @@ const allProjects: Project[] = [
       },
     ],
   },
+  {
+    slug: 'tri-band-isolator',
+    index: '07',
+    title: 'Tri-Band Isolator',
+    kicker: 'A 3-band analog DJ isolator I’m designing and building, from the circuit to the enclosure.',
+    summary:
+      'A tabletop isolator that sits on the front of an Allen & Heath Xone:96 and splits the mix into lows, mids and highs, each one on its own knob. I’m designing the electronics and the enclosure myself.',
+    type: 'Industrial · Hardware · Audio',
+    year: '2026–',
+    palette: ['#ff6a1a', '#f2efe6', '#0b0a09'],
+    meta: [
+      { k: 'Role', v: 'Everything: circuit, PCB, enclosure, renders' },
+      { k: 'Status', v: 'In progress' },
+      { k: 'Tools', v: 'Rhino, Blender, Flux' },
+      { k: 'Size', v: '280 × 88 × 83 mm' },
+    ],
+    cover: { src: '/projects/tri-band-isolator/hero.jpg', alt: 'Tri-Band Isolator in white, three-quarter view', wide: true },
+    sections: [
+      {
+        label: 'What it is',
+        title: 'A DJ tool that sits on the mixer',
+        body: [
+          'An isolator splits the music into three bands, so a DJ can pull the bass out of a track or kill the highs with one turn. Mine is built to live on the front of an Allen & Heath Xone:96, held on by magnets, so it feels like part of the mixer instead of another box on the table.',
+        ],
+        media: [{ src: '/projects/tri-band-isolator/front.jpg', alt: 'Front view with crossover knobs and dot grille', wide: true }],
+      },
+      {
+        label: 'Form',
+        title: 'Studio console meets classic hi-fi',
+        body: [
+          'The control deck tilts 21° toward the DJ, the front is a 216-dot grille, and the whole body floats on a dark plinth with a small shadow gap underneath. Orange shows up in only two places: the bypass key and one signal line under the deck edge.',
+        ],
+        points: [
+          { k: 'Bands', v: 'Three 33 mm knobs for LOW, MID and HIGH, each with a +4 / +7 / +12 dB boost toggle.' },
+          { k: 'Crossover', v: 'Two front knobs move the split points between the bands in real time.' },
+          { k: 'Bypass', v: 'A Cherry MX key in a glowing well, with an ACTIVE light above it.' },
+        ],
+        media: [
+          { src: '/projects/tri-band-isolator/deck.jpg', alt: 'Control deck close-up' },
+          { src: '/projects/tri-band-isolator/side.jpg', alt: 'Left side with inputs and USB-C' },
+          { src: '/projects/tri-band-isolator/top.jpg', alt: 'Top view of the control deck', wide: true },
+        ],
+      },
+      {
+        label: 'Colorways',
+        title: 'One flagship, two explorations',
+        body: [
+          'White with orange is the flagship. Noir and Riso Pop were explorations to see how far the same shape could stretch, from a dark studio piece with brass details to something that looks like a risograph print.',
+        ],
+        media: [
+          { src: '/projects/tri-band-isolator/noir-hero.jpg', alt: 'Noir colorway', caption: 'Noir' },
+          { src: '/projects/tri-band-isolator/pop-hero.jpg', alt: 'Riso Pop colorway', caption: 'Riso Pop' },
+          { src: '/projects/tri-band-isolator/noir-deck.jpg', alt: 'Noir control deck close-up' },
+          { src: '/projects/tri-band-isolator/pop-deck.jpg', alt: 'Riso Pop control deck close-up' },
+        ],
+      },
+      {
+        label: 'Built to open',
+        title: 'Four screws and the shell lifts off',
+        body: [
+          'It’s two printed parts: a one-piece shell and a tray. Four screws from below go into brass inserts, and once they’re out the shell lifts straight off. The main board stays on the tray, and every knob, switch and jack can be reached from inside. Four bar magnets sit under a felt pad on the back.',
+        ],
+        media: [
+          { src: '/projects/tri-band-isolator/exploded.jpg', alt: 'Exploded view: shell lifted off the tray and board', fit: 'contain', bg: '#ffffff' },
+          { src: '/projects/tri-band-isolator/inside.jpg', alt: 'Inside the shell with panel-mounted pots and jacks', fit: 'contain', bg: '#ffffff' },
+          { src: '/projects/tri-band-isolator/back.jpg', alt: 'Back with the felt pad over the magnets', wide: true },
+        ],
+      },
+      {
+        label: 'Status',
+        title: 'Now building the electronics',
+        body: [
+          'The circuit is fully analog, with a crossover I can tune live and a relay bypass that passes the signal straight through if the power drops. It runs on USB-C. I’m laying out the boards as six small modules and starting with power.',
+          'The prototype shell prints in clear PLA. The plan for the final one is transparent PETG.',
+        ],
+      },
+    ],
+  },
 ];
 
-const order = ['redline', 'step', 'colectivo-under', 'ooln', 'exalt', 'club-de-lo-roto'];
+const order = ['redline', 'step', 'colectivo-under', 'ooln', 'exalt', 'tri-band-isolator', 'club-de-lo-roto'];
 export const projects: Project[] = order
   .map((slug) => allProjects.find((p) => p.slug === slug)!)
   .map((p, i) => ({ ...p, index: String(i + 1).padStart(2, '0') }));

@@ -10,6 +10,7 @@
 
 export type Media = {
   src?: string;          // image or .mp4/.webm path in /public
+  poster?: string;       // still frame shown before a video loads
   alt: string;
   caption?: string;
   wide?: boolean;        // full-bleed
@@ -551,7 +552,10 @@ const allProjects: Project[] = [
         body: [
           'An isolator splits the music into three bands, so a DJ can pull the bass out of a track or kill the highs with one turn. Mine is built to live on the front of an Allen & Heath Xone:96, held on by magnets, so it feels like part of the mixer instead of another box on the table.',
         ],
-        media: [{ src: '/projects/tri-band-isolator/front.jpg', alt: 'Front view with crossover knobs and dot grille', wide: true }],
+        media: [
+          { src: '/projects/tri-band-isolator/teaser.mp4', poster: '/projects/tri-band-isolator/teaser-poster.jpg', alt: 'Teaser', wide: true },
+          { src: '/projects/tri-band-isolator/front.jpg', alt: 'Front view with crossover knobs and dot grille', wide: true },
+        ],
       },
       {
         label: 'Form',

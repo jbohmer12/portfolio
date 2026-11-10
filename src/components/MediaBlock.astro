@@ -10,7 +10,7 @@ const caption = media.caption ?? (media.src ? media.alt : undefined);
   <div class:list={['media', { 'media--wide': media.wide, 'media--contain': media.fit === 'contain', 'media--natural': !!media.src && media.fit !== 'contain' }]} style={`--p1:${palette[0]};--p2:${palette[1]};--p3:${palette[2]};${media.bg ? `background:${media.bg};` : ''}`}>
     {media.src ? (
       isVideo ? (
-        <video src={media.src} autoplay muted loop playsinline aria-label={media.alt} data-parallax={px}></video>
+        <video src={media.src} poster={media.poster} autoplay muted loop playsinline preload="metadata" aria-label={media.alt} data-parallax={px}></video>
       ) : (
         <img src={media.src} alt={media.alt} loading="lazy" decoding="async" data-parallax={px} />
       )
@@ -29,5 +29,7 @@ const caption = media.caption ?? (media.src ? media.alt : undefined);
   .media img, .media video { transform: scale(1.12); }
   .media--natural { aspect-ratio: auto; }
   .media--natural img, .media--natural video { height: auto; transform: none; }
+  /* videos get a fixed 16:9 box so loading can't shift the layout (Safari) */
+  .media--natural video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
   .media--contain img, .media--contain video { object-fit: contain; transform: none; padding: clamp(16px, 3vw, 40px); }
 </style>

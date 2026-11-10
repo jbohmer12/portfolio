@@ -23,6 +23,7 @@ export type Section = {
   body: string[];        // paragraphs
   points?: { k: string; v: string }[];
   media?: Media[];
+  wall?: boolean;         // show media as an uncropped poster wall (3 columns)
 };
 
 export type Project = {
@@ -391,13 +392,23 @@ const allProjects: Project[] = [
           'The flyers are where I got to experiment the most. Every event was a chance to try a new layout, typeface or mood while still feeling like the same collective.',
           'For bigger nights I made a set of artist cards so each DJ had something to share on their own.',
         ],
+        wall: true,
         media: [
-          { src: '/projects/colectivo-under/mad-radio.jpg', alt: 'Mad Radio Takeover', fit: 'contain', bg: '#000000' },
-          { src: '/projects/colectivo-under/lucky-7.jpg', alt: 'Lucky 7 After Dark', fit: 'contain', bg: '#000000' },
-          { src: '/projects/colectivo-under/the-opening.jpg', alt: 'The Opening', fit: 'contain', bg: '#000000' },
-          { src: '/projects/colectivo-under/the-closing.jpg', alt: 'The Closing', fit: 'contain', bg: '#000000' },
-          { src: '/projects/colectivo-under/artist-paul-coman.jpg', alt: 'Artist card: Paul Coman', fit: 'contain', bg: '#000000' },
-          { src: '/projects/colectivo-under/artist-nars.jpg', alt: 'Artist card: Nars', fit: 'contain', bg: '#000000' },
+          { src: '/projects/colectivo-under/mad-radio.jpg', alt: 'Mad Radio Takeover' },
+          { src: '/projects/colectivo-under/prison-break.jpg', alt: 'Prison Break at Vici' },
+          { src: '/projects/colectivo-under/undertone.jpg', alt: 'Undertone' },
+          { src: '/projects/colectivo-under/the-opening.jpg', alt: 'The Opening' },
+          { src: '/projects/colectivo-under/speaker-people-flyer.jpg', alt: 'Speaker People' },
+          { src: '/projects/colectivo-under/undertone-miro.jpg', alt: 'Undertone: Miro' },
+          { src: '/projects/colectivo-under/found-on-39th.jpg', alt: 'Found on 39th pop-up' },
+          { src: '/projects/colectivo-under/prison-break-3yr.jpg', alt: 'Prison Break, 3 year anniversary' },
+          { src: '/projects/colectivo-under/the-closing.jpg', alt: 'The Closing' },
+          { src: '/projects/colectivo-under/anniversary.jpg', alt: '1 year anniversary' },
+          { src: '/projects/colectivo-under/lucky-7.jpg', alt: 'Lucky 7 After Dark' },
+          { src: '/projects/colectivo-under/studio24-valentines.jpg', alt: 'Valentine’s Day pop-up at Studio 24' },
+          { src: '/projects/colectivo-under/studio24-mmw.jpg', alt: 'Miami Music Week pop-up at Studio 24' },
+          { src: '/projects/colectivo-under/artist-paul-coman.jpg', alt: 'Artist card: Paul Coman' },
+          { src: '/projects/colectivo-under/artist-nars.jpg', alt: 'Artist card: Nars' },
         ],
       },
       {

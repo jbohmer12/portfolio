@@ -82,7 +82,7 @@ const { project: p, next } = Astro.props as { project: Project; next: Project };
           )}
         </div>
         {s.media && (
-          <div class="chapter__media">
+          <div class:list={['chapter__media', { 'chapter__media--wall': s.wall }]}>
             {s.media.map((m) => <MediaBlock media={m} palette={p.palette} />)}
           </div>
         )}
@@ -144,6 +144,10 @@ const { project: p, next } = Astro.props as { project: Project; next: Project };
   .chapter__body .body-lg { margin: 0; }
   .chapter__media { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 24px); margin-top: clamp(20px, 4vw, 60px); }
   .chapter__media :global(.fig--wide) { grid-column: 1 / -1; }
+  /* poster wall: uncropped, masonry-style columns */
+  .chapter__media--wall { display: block; columns: 3; column-gap: clamp(12px, 1.6vw, 24px); }
+  .chapter__media--wall :global(.fig) { break-inside: avoid; margin-bottom: clamp(16px, 2vw, 28px); }
+  @media (max-width: 860px) { .chapter__media--wall { columns: 2; } }
   @media (max-width: 860px) {
     .chapter__label, .chapter__body { grid-column: 1 / -1; }
     .chapter__media { grid-template-columns: 1fr; }

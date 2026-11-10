@@ -122,7 +122,7 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
         <article class="earlier__item" data-reveal>
           <div class="earlier__imgs">
             {e.imgs.map((im) => im.src.endsWith('.mp4')
-              ? <video src={im.src} poster={im.poster} width={im.w} height={im.h} aria-label={im.alt} autoplay muted loop playsinline preload="none"></video>
+              ? <video src={im.src} poster={im.poster} width={im.w} height={im.h} aria-label={im.alt} autoplay muted loop playsinline preload="metadata"></video>
               : <img src={im.src} width={im.w} height={im.h} alt={im.alt} loading="lazy" decoding="async" />)}
           </div>
           <div class="earlier__text">
@@ -297,8 +297,9 @@ import { projects, awards, site, graphic, side, earlier } from '../data/projects
   .earlier { padding-block: clamp(80px, 12vw, 160px) 0; }
   .earlier__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); margin-top: clamp(28px, 4vw, 48px); }
   .earlier__item { display: grid; gap: 18px; align-content: start; }
-  .earlier__imgs { display: grid; grid-template-columns: 3fr 2fr; gap: 10px; align-items: stretch; }
-  .earlier__imgs img, .earlier__imgs video { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; background: var(--bg-2); }
+  /* the row has a fixed shape so media loading (esp. the video in Safari) can never resize it */
+  .earlier__imgs { display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: minmax(0, 1fr); gap: 10px; aspect-ratio: 20 / 9; contain: layout; }
+  .earlier__imgs img, .earlier__imgs video { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; border-radius: 4px; background: var(--bg-2); }
   .earlier__text { display: grid; gap: 8px; }
   .earlier__title { font-size: clamp(24px, 2.4vw, 36px); margin: 0; }
   .earlier__text .mono { margin: 0 0 4px; }

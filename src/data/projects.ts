@@ -599,7 +599,7 @@ const allProjects: Project[] = [
         label: 'Status',
         title: 'Now building the electronics',
         body: [
-          'The circuit is fully analog, with a crossover I can tune live and a relay bypass that passes the signal straight through if the power drops. It runs on USB-C. I’m laying out the boards as six small modules and starting with power.',
+          'The circuit is fully analog, with a crossover I can tune live and a relay bypass that passes the signal straight through if the power drops. It runs on USB-C. I’m laying out the boards now, starting with power.',
           'The prototype shell prints in clear PLA. The plan for the final one is transparent PETG.',
         ],
       },

@@ -3,10 +3,14 @@
 // Pins while you scroll and scrubs a 150-frame render sequence on a <canvas>.
 // Frames live in /public/projects/tri-band-isolator/explode/. Astro bundles the
 // <style> and <script> below once, and only on pages that render this component.
-interface Props { src?: string; frames?: number }
-const { src = '/projects/tri-band-isolator/explode/f####.webp', frames = 150 } = Astro.props;
+interface Props { src?: string; srcSmall?: string; frames?: number }
+const {
+  src = '/projects/tri-band-isolator/explode/f####.webp',        // 1920×1080, desktop
+  srcSmall = '/projects/tri-band-isolator/explode-sm/f####.webp', // 1280×720, phones (about half the weight)
+  frames = 150,
+} = Astro.props;
 ---
-<section class="tbx" data-scroll-explode data-frames={frames} data-src={src} aria-label="Exploded view of the Tri-Band Isolator">
+<section class="tbx" data-scroll-explode data-frames={frames} data-src={src} data-src-small={srcSmall} aria-label="Exploded view of the Tri-Band Isolator">
   <div class="tbx__stage">
     <canvas class="tbx__canvas" role="img" aria-label="The Tri-Band Isolator separating into its shell, controls, main board and base tray as you scroll"></canvas>
     <div class="tbx__loading mono">Loading</div>
@@ -29,8 +33,8 @@ const { src = '/projects/tri-band-isolator/explode/f####.webp', frames = 150 } =
       </div>
       <div class="tbx__caption" data-from="0.72" data-to="1.01">
         <span class="tbx__eyebrow mono">03 · Core</span>
-        <h3 class="tbx__title">One board. One tray.</h3>
-        <p class="tbx__body">A single 140 × 64 mm main board sits on the base tray, with four magnets and a felt pad underneath.</p>
+        <h3 class="tbx__title">Every part within reach.</h3>
+        <p class="tbx__body">The electronics sit on the base tray, so any part can be reached, fixed or swapped. On the back, four magnets hold it to the mixer, covered by a felt pad.</p>
       </div>
     </div>
 
@@ -44,7 +48,7 @@ const { src = '/projects/tri-band-isolator/explode/f####.webp', frames = 150 } =
     --tbx-text: #f0ece4;
     --tbx-muted: rgba(240, 236, 228, 0.62);
     --tbx-accent: var(--p1, #ff4600);     /* the case study's palette colour */
-    --tbx-scroll: 450vh;                  /* how much scrolling the sequence takes */
+    --tbx-scroll: 350vh;                  /* how much scrolling the sequence takes */
     position: relative;
     height: var(--tbx-scroll);
     background: var(--tbx-bg);
@@ -117,7 +121,9 @@ const { src = '/projects/tri-band-isolator/explode/f####.webp', frames = 150 } =
 
   function init(root: HTMLElement) {
     const count = parseInt(root.dataset.frames ?? '', 10) || 150;
-    const pattern = root.dataset.src || 'frames/f####.webp';
+    // phones and small tablets never show the frame wider than ~1300px, so they get the 1280px set
+    const small = root.dataset.srcSmall && window.matchMedia('(max-width: 820px)').matches;
+    const pattern = (small ? root.dataset.srcSmall : root.dataset.src) || 'frames/f####.webp';
     const minVisible = parseFloat(root.dataset.minVisible || '0.62');
     const canvas = root.querySelector<HTMLCanvasElement>('.tbx__canvas')!;
     const ctx = canvas.getContext('2d')!;

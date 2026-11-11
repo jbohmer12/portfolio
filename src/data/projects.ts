@@ -25,6 +25,7 @@ export type Section = {
   points?: { k: string; v: string }[];
   media?: Media[];
   wall?: boolean;         // show media as an uncropped poster wall (3 columns)
+  embed?: 'scroll-explode'; // render a custom interactive block instead of a text chapter
 };
 
 export type Project = {
@@ -588,16 +589,11 @@ const allProjects: Project[] = [
         ],
       },
       {
+        // pinned scroll-driven exploded view; its captions carry the 'built to open' story
         label: 'Built to open',
-        title: 'Four screws and the shell lifts off',
-        body: [
-          'It’s two printed parts: a one-piece shell and a tray. Four screws from below go into brass inserts, and once they’re out the shell lifts straight off. The main board stays on the tray, and every knob, switch and jack can be reached from inside. Four bar magnets sit under a felt pad on the back.',
-        ],
-        media: [
-          { src: '/projects/tri-band-isolator/exploded-hero.jpg', alt: 'Exploded view: knobs, shell, board, tray and screws' },
-          { src: '/projects/tri-band-isolator/exploded-front.jpg', alt: 'Exploded view from the front' },
-          { src: '/projects/tri-band-isolator/back.jpg', alt: 'Back with the felt pad over the magnets', wide: true },
-        ],
+        title: 'Built to be opened',
+        body: [],
+        embed: 'scroll-explode',
       },
       {
         label: 'Status',

@@ -1,0 +1,252 @@
+---
+// Tri-Band Isolator: scroll-driven exploded view.
+// Pins while you scroll and scrubs a 150-frame render sequence on a <canvas>.
+// Frames live in /public/projects/tri-band-isolator/explode/. Astro bundles the
+// <style> and <script> below once, and only on pages that render this component.
+interface Props { src?: string; frames?: number }
+const { src = '/projects/tri-band-isolator/explode/f####.webp', frames = 150 } = Astro.props;
+---
+<section class="tbx" data-scroll-explode data-frames={frames} data-src={src} aria-label="Exploded view of the Tri-Band Isolator">
+  <div class="tbx__stage">
+    <canvas class="tbx__canvas" role="img" aria-label="The Tri-Band Isolator separating into its shell, controls, main board and base tray as you scroll"></canvas>
+    <div class="tbx__loading mono">Loading</div>
+
+    <div class="tbx__captions">
+      <div class="tbx__caption" data-from="0" data-to="0.15">
+        <span class="tbx__eyebrow mono">Tri-Band Isolator</span>
+        <h3 class="tbx__title">Built to be opened.</h3>
+        <p class="tbx__body">Scroll to take it apart.</p>
+      </div>
+      <div class="tbx__caption" data-from="0.18" data-to="0.42">
+        <span class="tbx__eyebrow mono">01 · Shell</span>
+        <h3 class="tbx__title">Four screws, one shell.</h3>
+        <p class="tbx__body">The shell lifts off after four M3 button-head screws into heat-set inserts. No glue, no clips to snap.</p>
+      </div>
+      <div class="tbx__caption" data-from="0.45" data-to="0.69">
+        <span class="tbx__eyebrow mono">02 · Controls</span>
+        <h3 class="tbx__title">Everything you touch, replaceable.</h3>
+        <p class="tbx__body">Three band knobs, two crossover knobs and a mechanical bypass switch, all panel-mounted and off the shelf.</p>
+      </div>
+      <div class="tbx__caption" data-from="0.72" data-to="1.01">
+        <span class="tbx__eyebrow mono">03 · Core</span>
+        <h3 class="tbx__title">One board. One tray.</h3>
+        <p class="tbx__body">A single 140 × 64 mm main board sits on the base tray, with four magnets and a felt pad underneath.</p>
+      </div>
+    </div>
+
+    <div class="tbx__progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<style is:inline>
+  .tbx {
+    --tbx-bg: #000;                       /* frames have black baked in */
+    --tbx-text: #f0ece4;
+    --tbx-muted: rgba(240, 236, 228, 0.62);
+    --tbx-accent: var(--p1, #ff4600);     /* the case study's palette colour */
+    --tbx-scroll: 450vh;                  /* how much scrolling the sequence takes */
+    position: relative;
+    height: var(--tbx-scroll);
+    background: var(--tbx-bg);
+    color: var(--tbx-text);
+    margin-block: clamp(60px, 10vw, 140px);
+  }
+  .tbx__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .tbx__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* soft fade into the page above/below */
+  .tbx__stage::before, .tbx__stage::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 12vh; z-index: 1; pointer-events: none;
+  }
+  .tbx__stage::before { top: 0; background: linear-gradient(var(--tbx-bg), transparent); }
+  .tbx__stage::after { bottom: 0; background: linear-gradient(transparent, var(--tbx-bg)); }
+
+  .tbx__captions {
+    position: absolute; z-index: 2;
+    left: clamp(16px, 6vw, 96px); bottom: clamp(32px, 10vh, 120px);
+    width: min(360px, calc(100% - 32px));
+    pointer-events: none; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
+  }
+  .tbx__caption {
+    position: absolute; left: 0; bottom: 0; width: 100%;
+    opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .tbx__caption.is-active { opacity: 1; transform: none; }
+
+  .tbx__eyebrow { display: block; margin: 0 0 12px; color: var(--tbx-accent); }
+  .tbx__title {
+    margin: 0 0 10px;
+    font-weight: 800; font-stretch: 125%; font-variation-settings: 'wdth' 125;
+    font-size: clamp(22px, 2.4vw, 34px); line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase;
+  }
+  .tbx__body { margin: 0; font-size: 15px; line-height: 1.5; color: var(--tbx-muted); }
+
+  .tbx__progress {
+    position: absolute; z-index: 2; right: clamp(16px, 4vw, 48px); top: 50%;
+    width: 2px; height: 120px; margin-top: -60px; background: rgba(240, 236, 228, 0.15);
+  }
+  .tbx__progress span {
+    display: block; width: 100%; height: 100%; background: var(--tbx-accent);
+    transform-origin: top; transform: scaleY(0);
+  }
+
+  .tbx__loading {
+    position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    color: var(--tbx-muted); transition: opacity 0.4s ease;
+  }
+  .tbx.is-ready .tbx__loading { opacity: 0; }
+
+  /* phones: captions sit at the bottom, full width */
+  @media (max-width: 640px) {
+    .tbx__captions { left: 16px; right: 16px; bottom: 28px; width: auto; }
+    .tbx__progress { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tbx__caption { transition: none; transform: none; }
+  }
+</style>
+
+<script>
+  /* Scrubs the rendered image sequence as the section scrolls through the viewport. */
+  function pad(n: number, w: number) {
+    let s = String(n);
+    while (s.length < w) s = '0' + s;
+    return s;
+  }
+  const frameUrl = (pattern: string, i: number) => pattern.replace(/#+/, (m) => pad(i, m.length));
+
+  function init(root: HTMLElement) {
+    const count = parseInt(root.dataset.frames ?? '', 10) || 150;
+    const pattern = root.dataset.src || 'frames/f####.webp';
+    const minVisible = parseFloat(root.dataset.minVisible || '0.62');
+    const canvas = root.querySelector<HTMLCanvasElement>('.tbx__canvas')!;
+    const ctx = canvas.getContext('2d')!;
+    const bar = root.querySelector<HTMLElement>('.tbx__progress span');
+    const loadingEl = root.querySelector<HTMLElement>('.tbx__loading');
+    const bg = getComputedStyle(root).getPropertyValue('--tbx-bg').trim() || '#000';
+    const captions = Array.from(root.querySelectorAll<HTMLElement>('.tbx__caption')).map((el) => ({
+      el, from: parseFloat(el.dataset.from!), to: parseFloat(el.dataset.to!),
+    }));
+
+    const frames: (HTMLImageElement | undefined)[] = new Array(count);
+    let loaded = 0;
+    let current = -1;
+    let ticking = false;
+
+    // first frame straight away, then coarse-to-fine (every 16th, 8th, 4th...) so early scrubbing still works
+    const order: number[] = [];
+    const seen: Record<number, 1> = {};
+    [16, 8, 4, 2, 1].forEach((step) => {
+      for (let i = 0; i < count; i += step) if (!seen[i]) { seen[i] = 1; order.push(i); }
+    });
+    if (!seen[count - 1]) order.push(count - 1);
+
+    let inFlight = 0;
+    let next = 0;
+    const MAX_PARALLEL = 6;
+
+    function pump() {
+      while (inFlight < MAX_PARALLEL && next < order.length) load(order[next++], 0);
+    }
+    function load(i: number, attempt: number) {
+      const img = new Image();
+      img.decoding = 'async';
+      inFlight++;
+      const done = () => {
+        loaded++;
+        inFlight--;
+        if (loadingEl) loadingEl.textContent = 'Loading ' + Math.round((loaded / count) * 100) + '%';
+        if (loaded === count) root.classList.add('is-ready');
+        pump();
+      };
+      img.onload = () => {
+        frames[i] = img;
+        if (loaded === 0 || i === 0) resize();
+        requestDraw(true);
+        done();
+      };
+      img.onerror = () => {
+        // retry twice, then give up on this frame (the nearest loaded frame is shown instead)
+        if (attempt < 2) { inFlight--; setTimeout(() => load(i, attempt + 1), 400 * (attempt + 1)); }
+        else done();
+      };
+      img.src = frameUrl(pattern, i);
+    }
+
+    function progress() {
+      const r = root.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      if (span <= 0) return 0;
+      return Math.min(1, Math.max(0, -r.top / span));
+    }
+    function nearestLoaded(i: number) {
+      if (frames[i]) return i;
+      for (let d = 1; d < count; d++) {
+        if (i - d >= 0 && frames[i - d]) return i - d;
+        if (i + d < count && frames[i + d]) return i + d;
+      }
+      return -1;
+    }
+    function draw(force: boolean) {
+      ticking = false;
+      const p = progress();
+      const i = nearestLoaded(Math.round(p * (count - 1)));
+      if (bar) bar.style.transform = 'scaleY(' + p + ')';
+      for (const cap of captions) cap.el.classList.toggle('is-active', p >= cap.from && p < cap.to);
+      if (i < 0 || (i === current && !force)) return;
+      current = i;
+      const img = frames[i]!;
+      const cw = canvas.width, ch = canvas.height;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+      // "cover", but never crop away more than the centre (minVisible) of the frame's width
+      let s = Math.max(cw / iw, ch / ih);
+      s = Math.min(s, cw / (iw * minVisible));
+      const dw = iw * s, dh = ih * s;
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, cw, ch);
+      const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+      ctx.drawImage(img, dx, dy, dw, dh);
+      // on narrow screens the frame doesn't fill the height: fade its top/bottom edges
+      // so the floor reflection doesn't end in a hard line
+      if (dy > 1) {
+        const f = dh * 0.14;
+        const top = ctx.createLinearGradient(0, dy, 0, dy + f);
+        top.addColorStop(0, bg); top.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = top; ctx.fillRect(0, dy, cw, f);
+        const bot = ctx.createLinearGradient(0, dy + dh - f, 0, dy + dh);
+        bot.addColorStop(0, 'rgba(0,0,0,0)'); bot.addColorStop(1, bg);
+        ctx.fillStyle = bot; ctx.fillRect(0, dy + dh - f, cw, f);
+      }
+    }
+    function requestDraw(force: boolean) {
+      if (ticking && !force) return;
+      ticking = true;
+      requestAnimationFrame(() => draw(force));
+    }
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      ctx.imageSmoothingQuality = 'high';
+      current = -1;
+      requestDraw(true);
+    }
+
+    window.addEventListener('scroll', () => requestDraw(false), { passive: true });
+    window.addEventListener('resize', resize);
+
+    // only start loading when the section gets near the viewport, so the top of the page stays fast
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { io.disconnect(); pump(); }
+      }, { rootMargin: '150% 0px' });
+      io.observe(root);
+    } else {
+      pump();
+    }
+    resize();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-scroll-explode]').forEach(init);
+</script>

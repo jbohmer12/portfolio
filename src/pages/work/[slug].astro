@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import MediaBlock from '../../components/MediaBlock.astro';
+import ScrollExplode from '../../components/ScrollExplode.astro';
 import { projects, type Project } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -62,7 +63,9 @@ const { project: p, next } = Astro.props as { project: Project; next: Project };
     </section>
 
     <!-- sections -->
-    {p.sections.map((s) => (
+    {p.sections.map((s) => s.embed === 'scroll-explode' ? (
+      <ScrollExplode />
+    ) : (
       <section class="wrap chapter">
         <div class="chapter__label">
           <p class="mono" data-reveal>{s.label}</p>
